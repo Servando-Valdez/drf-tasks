@@ -27,9 +27,16 @@ class TaskDetail(APIView):
             return Task.objects.get(pk=pk)
         except Task.DoesNotExist:
             raise NotFound(f'Task with id {pk} not found')
-        
 
     def get(self, request, pk):
         task = self.get_object(pk)
         serializer = TaskSeralizer(task)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    def put(self, request, pk):
+        task = self.get_object(pk)
+        serializer = TaskSeralizer(task, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
