@@ -34,7 +34,6 @@ const ModalUpdate = () =>{
     useEffect(() => {
         setUpdateTask(globalTask.nombre);
         setUpdateCompleted(globalTask.completada);
-        console.log(globalTask.completada);
     }, [showUpdate]);
 
     return(

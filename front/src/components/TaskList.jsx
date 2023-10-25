@@ -15,7 +15,7 @@ const TaskList = () => {
     return (
         <>
             <div className='d-lg-flex justify-content-center'>
-                <div id='table' className='w-50 border-0'>
+                <div id='table' className='w-50'>
                     <h1 className='text-center'>Task Manager</h1>
                     <CreateTask />
                     <Table responsive='md'>

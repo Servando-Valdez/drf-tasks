@@ -24,17 +24,9 @@ export function TaskProvider({ children }) {
             const data = await taskService.getTasks();
             setTasks(data);
         } catch (error) {
-            console.log('error', error);
             errorMessage('Error to get tasks');
         }
     };
-
-    // const onCreate = (newTask) => {
-    //     console.log('newTask', newTask);
-    //     const updatedTasks = [...tasks, newTask];
-    //     setTasks(updatedTasks);
-    //     successMessage('Task created');
-    // };
 
     const onDelete = async(uuid) => {
         try {
@@ -46,7 +38,6 @@ export function TaskProvider({ children }) {
             getTasks();
             successMessage('Task deleted');
         } catch (error) {
-            console.log('error', error);
             errorMessage('Error to delete task');
         }
     };
@@ -70,7 +61,8 @@ export function TaskProvider({ children }) {
     const handleCreate = async({nombre}) =>{
         try {
             const newTask = await taskService.createTask({nombre});
-            const updatedTasks = [...tasks, newTask];
+            // const updatedTasks = [...tasks, newTask];
+            const updatedTasks = [newTask, ...tasks]
             setTasks(updatedTasks);
             successMessage('Task created');
         } catch (error) {
