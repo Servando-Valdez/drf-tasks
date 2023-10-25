@@ -9,6 +9,11 @@ from .serializer import TaskSeralizer
 
 class TaskList(APIView):
     
+    def get(self, request):
+        tasks = Task.objects.all()
+        serializer = TaskSeralizer(tasks, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
     def post(self, request):
         serializer = TaskSeralizer(data=request.data)
         if serializer.is_valid():
