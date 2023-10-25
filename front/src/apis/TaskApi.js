@@ -16,8 +16,10 @@ export class TaskService{
                 return response.data;
         }
         
-        async createTask(task){
-                const response = await instance.post('/tasks', task);
+        async createTask({nombre}){
+                const response = await instance.post('/tasks', {
+                    nombre: nombre
+                });
                 return response.data;
         }
         

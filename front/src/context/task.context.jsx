@@ -9,20 +9,14 @@ TaskProvider.propTypes = {
     children: PropTypes.node.isRequired,
 };
 
-const nullTask = {
-    uuid: '',
-    nombre: '',
-    completada: '',
-}
-
 export function TaskProvider({ children }) {
     const [tasks, setTasks] = useState([]);
-    const [globalTask, setGlobalTask] = useState(nullTask);
+    const [globalTask, setGlobalTask] = useState(null);
 
     const taskService = new TaskService();
 
-    const refreshTask = () => {
-        setGlobalTask(nullTask);
+    const refreshGlobalTask = () => {
+        setGlobalTask(null);
     }
 
     const getTasks = async () => {
@@ -35,12 +29,12 @@ export function TaskProvider({ children }) {
         }
     };
 
-    const onCreate = (newTask) => {
-        console.log('newTask', newTask);
-        const updatedTasks = [...tasks, newTask];
-        setTasks(updatedTasks);
-        successMessage('Task created');
-    };
+    // const onCreate = (newTask) => {
+    //     console.log('newTask', newTask);
+    //     const updatedTasks = [...tasks, newTask];
+    //     setTasks(updatedTasks);
+    //     successMessage('Task created');
+    // };
 
     const onDelete = async(uuid) => {
         try {
@@ -73,6 +67,17 @@ export function TaskProvider({ children }) {
         }
     };
 
+    const handleCreate = async({nombre}) =>{
+        try {
+            const newTask = await taskService.createTask({nombre});
+            const updatedTasks = [...tasks, newTask];
+            setTasks(updatedTasks);
+            successMessage('Task created');
+        } catch (error) {
+            errorMessage('Error to create task');
+        }
+    }
+
     const handleUpdate = async ({
         uuid,
         nombre,
@@ -84,14 +89,10 @@ export function TaskProvider({ children }) {
                 nombre,
                 completada
             })
-            // const updateTask = globalTask;
-            // updateTask.nombre = name;
-            // updateTask.completada = completed;
-            setGlobalTask(nullTask);
+            refreshGlobalTask();
             onUpdate(taskUpdated);
             successMessage('Task updated2');
         } catch (error) {
-            console.log('error', error);
             errorMessage('Error to update task');
         }
     }
@@ -101,13 +102,14 @@ export function TaskProvider({ children }) {
             value={{
                 getTask,
                 getTasks,
+                handleCreate,
                 tasks,
                 onDelete,
                 onUpdate,
-                onCreate,
+                // onCreate,
                 globalTask,
                 setGlobalTask,
-                refreshTask,
+                refreshGlobalTask,
                 handleUpdate,
             }}
         >
