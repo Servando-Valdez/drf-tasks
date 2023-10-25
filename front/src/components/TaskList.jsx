@@ -4,8 +4,9 @@ import Task from './Task';
 import { useTask } from '../context/task.context';
 import ModalDetail from './ModalDetail';
 import ModalUpdate from './modalUpdate';
+import CreateTask from './CreateTask';
 const TaskList = () => {
-    const { tasks, getTasks } = useTask();
+    const { tasks, getTasks, globalTask } = useTask();
 
     useEffect(() => {
         getTasks();
@@ -14,8 +15,9 @@ const TaskList = () => {
     return (
         <>
             <div className='d-lg-flex justify-content-center'>
-                <div id='table' className='w-50'>
+                <div id='table' className='w-50 border-0'>
                     <h1 className='text-center'>Task Manager</h1>
+                    <CreateTask />
                     <Table responsive='md'>
                         <thead>
                             <tr>
@@ -36,8 +38,12 @@ const TaskList = () => {
                     </Table>
                 </div>
             </div>
-            <ModalDetail />
-            <ModalUpdate />
+            {
+                globalTask === null ? null : <ModalDetail />
+            }
+            {
+                globalTask === null ? null : <ModalUpdate />
+            }
         </>
     )
 };

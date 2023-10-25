@@ -9,17 +9,23 @@ ModalProvider.propTypes = {
 };
 
 export function ModalProvider({ children }){
-    const { getTask } = useTask();
+    const { getTask, refreshGlobalTask } = useTask();
     const [showDetail, setShowDetail] = useState(false);
     const [showUpdate, setShowUpdate] = useState(false);
 
-    const handleShowUpdateClose = () => setShowUpdate(false);
+    const handleShowUpdateClose = () => {
+        refreshGlobalTask();
+        setShowUpdate(false);
+    }
     const handleShowUpdateShow = async(task) => {
         await getTask(task.uuid);
         setShowUpdate(true);
     }
 
-    const handleShowDetailClose = () => setShowDetail(false);
+    const handleShowDetailClose = () => {
+        refreshGlobalTask()
+        setShowDetail(false);
+    }
     const handleShowDetailShow = (task) => {
         getTask(task.uuid);
         setShowDetail(true);

@@ -4,6 +4,7 @@ import DeleteIcon from "./DeleteIcon";
 import PropTypes from 'prop-types';
 import { useTask } from '../context/task.context';
 import { useModal } from "../context/modal.context";
+
 const Task = ({ task }) => {
     const { onDelete } = useTask();
     const {
