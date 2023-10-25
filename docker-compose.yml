@@ -1,0 +1,12 @@
+version: "3.3"
+services:
+  db:
+    image: "postgres:alpine"
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ${SQL_DBNAME}
+      POSTGRES_USER: ${SQL_USER}
+      POSTGRES_PASSWORD: ${SQL_PASSWORD}
+    volumes:
+      - "./docker/postgres:/var/lib/postgresql/data"
