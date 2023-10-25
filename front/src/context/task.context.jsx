@@ -91,7 +91,7 @@ export function TaskProvider({ children }) {
             })
             refreshGlobalTask();
             onUpdate(taskUpdated);
-            successMessage('Task updated2');
+            successMessage('Task updated');
         } catch (error) {
             errorMessage('Error to update task');
         }
