@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import TaskList from './components/TaskList';
 import Navbar from './components/Navbar';
 import { TaskProvider } from './context/task.context';
+import { ModalProvider } from './context/modal.context';
 
 function App() {
 
@@ -12,7 +13,9 @@ function App() {
       <Navbar />
 
       <TaskProvider>
-        <TaskList/>
+        <ModalProvider>
+          <TaskList/>
+        </ModalProvider>
       </TaskProvider>
     </>
   )

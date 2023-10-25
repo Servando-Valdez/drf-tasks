@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
-// import Task from './Task';
+import Task from './Task';
 import {useTask} from '../context/task.context';
+import ModalDetail from './ModalDetail';
 const TaskList = () => {
     const { tasks, getTasks } = useTask();
 
@@ -22,14 +23,19 @@ const TaskList = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td className='col-sm-6'>Task</td>
-                            <td className='col-sm-6 '></td>
-                        </tr>
+                        {
+                            tasks.map((task) => (
+                                <Task
+                                    key={task.uuid}
+                                    task={task}
+                                />
+                            ))
+                        }
                     </tbody>
                 </Table>
             </div>
         </div>
+        <ModalDetail/>
         </>
     )
 };

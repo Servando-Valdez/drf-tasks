@@ -18,7 +18,6 @@ const nullTask = {
 
 export function TaskProvider({ children }) {
     const [tasks, setTasks] = useState([]);
-    // const [showDetail, setShowDetail] = useState(false);
     const [globalTask, setGlobalTask] = useState(nullTask);
 
     const taskService = new TaskService();

@@ -1,18 +1,20 @@
+import { useState, useEffect } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import EditIcon from "./EditIcon";
 import DeleteIcon from "./DeleteIcon";
 import PropTypes from 'prop-types';
+// import ModalUpdate from "./modalUpdate";
 import { errorMessage } from "../utils/messages";
 import { useTask } from '../context/task.context';
+import { useModal } from "../context/modal.context";
 const Task = ({ task }) => {
-    const { onDelete, onUpdate } = useTask();
-    // const { 
-    //     // showUpdate,
-    //     // handleShowUpdateClose,
-    //     handleShowUpdateShow,
-    //     handleShowDetailShow,
-    // } = useModal();
+    // const [localTask, setLocalTask] = useState(task);
+    const { onDelete } = useTask();
+    const {
+        handleShowUpdateShow,
+        handleShowDetailShow,
+    } = useModal();
 
     const handleDelete = async () => {
 
@@ -42,25 +44,12 @@ const Task = ({ task }) => {
         })
     }
 
-    // const handleUpdate = ({
-    //     name,
-    //     completed
-    // }) => {
-    //     const updateTask = localTask;
-    //     updateTask.nombre = name;
-    //     updateTask.completada = completed;
-    //     setLocalTask(updateTask);
-    //     onUpdate(localTask);
-    // }
-
     const handleShowDetail = ()=>{
-        // handleShowDetailShow(task);
-        console.log('handleShowDetail');
+        handleShowDetailShow(task);
     }
 
     const handleShowUpdate = () =>{
-        // handleShowUpdateShow(task);
-        console.log('handleShowUpdate');
+        handleShowUpdateShow(task);
     }
 
     return (
