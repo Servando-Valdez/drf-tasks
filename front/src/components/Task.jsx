@@ -1,22 +1,17 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
 import Swal from "sweetalert2";
 import EditIcon from "./EditIcon";
 import DeleteIcon from "./DeleteIcon";
 import PropTypes from 'prop-types';
-// import ModalUpdate from "./modalUpdate";
-import { errorMessage } from "../utils/messages";
 import { useTask } from '../context/task.context';
 import { useModal } from "../context/modal.context";
 const Task = ({ task }) => {
-    // const [localTask, setLocalTask] = useState(task);
     const { onDelete } = useTask();
     const {
         handleShowUpdateShow,
         handleShowDetailShow,
     } = useModal();
 
-    const handleDelete = async () => {
+    const handleDelete = () => {
 
         Swal.fire({
             title: 'Are you sure?',
@@ -28,18 +23,7 @@ const Task = ({ task }) => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`http://localhost:8000/api/v1/tasks/${task.uuid}`)
-                    .then(() => {
-                        onDelete(task.uuid);
-                        Swal.fire(
-                            'Deleted!',
-                            'Your file has been deleted.',
-                            'success'
-                        )
-                    })
-                    .catch(() => {
-                        errorMessage('Error to delete task');
-                    })
+                onDelete(task.uuid);
             }
         })
     }

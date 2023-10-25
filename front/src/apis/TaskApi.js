@@ -26,8 +26,8 @@ export class TaskService{
                 return response.data;
         }
 
-        async deleteTask(task){
-                const response = await instance.delete(`/tasks/${task.uuid}`);
+        async deleteTask(uuid){
+                const response = await instance.delete(`/tasks/${uuid}`);
                 return response.data;
         }
 }

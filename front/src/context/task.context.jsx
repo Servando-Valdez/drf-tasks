@@ -1,5 +1,4 @@
 import { createContext, useContext, useState } from 'react';
-import axios from 'axios';
 import PropTypes from 'prop-types';
 import { errorMessage, successMessage } from '../utils/messages';
 import { TaskService } from '../apis/TaskApi';
@@ -43,11 +42,19 @@ export function TaskProvider({ children }) {
         successMessage('Task created');
     };
 
-    const onDelete = (uuid) => {
-        const updatedTasks = tasks.filter((task) => task.uuid !== uuid);
-        setTasks(updatedTasks);
-        successMessage('Task deleted')
-        // También puedes manejar aquí el cierre de modales si es necesario.
+    const onDelete = async(uuid) => {
+        try {
+            await taskService.deleteTask(uuid);
+            //other way of refresh tasks
+            // const updatedTasks = tasks.filter((task) => task.uuid !== uuid);
+
+            //refresh tasks
+            getTasks();
+            successMessage('Task deleted');
+        } catch (error) {
+            console.log('error', error);
+            errorMessage('Error to delete task');
+        }
     };
 
     const onUpdate = (updateTask) => {
@@ -55,7 +62,6 @@ export function TaskProvider({ children }) {
             task.uuid === updateTask.uuid ? updateTask : task
         );
         setTasks(updatedTasks);
-        // También puedes manejar aquí el cierre de modales si es necesario.
     };
 
     const getTask = async (uuid) => {
@@ -96,8 +102,6 @@ export function TaskProvider({ children }) {
                 getTask,
                 getTasks,
                 tasks,
-                // showDetail,
-                // setShowDetail,
                 onDelete,
                 onUpdate,
                 onCreate,
