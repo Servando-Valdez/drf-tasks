@@ -14,8 +14,8 @@ export function ModalProvider({ children }){
     const [showUpdate, setShowUpdate] = useState(false);
 
     const handleShowUpdateClose = () => setShowUpdate(false);
-    const handleShowUpdateShow = (task) => {
-        getTask(task.uuid);
+    const handleShowUpdateShow = async(task) => {
+        await getTask(task.uuid);
         setShowUpdate(true);
     }
 
