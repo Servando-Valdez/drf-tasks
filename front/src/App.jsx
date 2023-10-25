@@ -1,13 +1,19 @@
 // import { useState } from 'react'
-import './App.css'
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import TaskList from './components/TaskList';
+import Navbar from './components/Navbar';
+import { TaskProvider } from './context/task.context';
 
 function App() {
 
   return (
     <>
-      <div>
-        <h1>hello world</h1>
-      </div>
+      <Navbar />
+
+      <TaskProvider>
+        <TaskList/>
+      </TaskProvider>
     </>
   )
 }
