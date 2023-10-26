@@ -1,4 +1,6 @@
-
+/**
+ * Completed is a component to show a icon if the task is completed.
+ */
 const Completed = () => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" className="bi bi-check-circle-fill" viewBox="0 0 16 16">

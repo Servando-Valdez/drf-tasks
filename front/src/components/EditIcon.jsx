@@ -1,4 +1,8 @@
 
+/**
+ * EditIcon is a functional component that renders a pencil square icon.
+ * This icon is often used to represent editing or modification actions.
+ */
 const EditIcon = () =>{
     return(
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-square" viewBox="0 0 16 16">

@@ -1,4 +1,8 @@
 
+/**
+ * DeleteIcon is a functional component that renders a trash can icon.
+ * This icon is often used to represent deletion or removal actions.
+ */
 const DeleteIcon = () => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">

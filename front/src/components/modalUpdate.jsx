@@ -5,21 +5,31 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useModal } from '../context/modal.context';
 import { useTask } from '../context/task.context';
+
+
+/**
+ * ModalUpdate is a component for updating task details within a modal.
+ */
 const ModalUpdate = () =>{
-    const {globalTask, handleUpdate} = useTask();
+    // State variables to track updated task information
     const [updateTask, setUpdateTask] = useState('');
     const [updateCompleted, setUpdateCompleted] = useState(false);
 
+    // Custom hooks to access task details, update function, and modal-related state
+    const {globalTask, handleUpdate} = useTask();
     const { showUpdate, handleShowUpdateClose  } = useModal();
 
+    //Handler function to update the task name as the user types.
     const handleUpdateTask = (e) => {
         setUpdateTask(e.target.value);
     };
 
+    //Handler function to toggle the completion status of the task.
     const handleUpdateCompleted = () => {
         setUpdateCompleted(!updateCompleted);
     };
 
+    //Handler function to submit the form and update the task.
     const handleSubmit = async(e) => {
         e.preventDefault();
         handleUpdate({
@@ -31,6 +41,10 @@ const ModalUpdate = () =>{
         handleShowUpdateClose();
     }
 
+    /**
+     * UseEffect to set initial values for updateTask and updateCompleted
+     * when the modal is shown (controlled by showUpdate).
+     */
     useEffect(() => {
         setUpdateTask(globalTask.name);
         setUpdateCompleted(globalTask.completed);

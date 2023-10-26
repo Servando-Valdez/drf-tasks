@@ -5,13 +5,21 @@ import PropTypes from 'prop-types';
 import { useTask } from '../context/task.context';
 import { useModal } from "../context/modal.context";
 
+/**
+ * Task is a component representing a single task in the task list.
+ * It provides options to view task details, update the task, and delete it.
+ * 
+ * @param {object} task - The task object to be displayed.
+ */
 const Task = ({ task }) => {
+    // Custom hook to access task-related functions and modal-related functions
     const { onDelete } = useTask();
     const {
         handleShowUpdateShow,
         handleShowDetailShow,
     } = useModal();
 
+    //Handler function to delete a task after user confirmation.
     const handleDelete = () => {
 
         Swal.fire({
@@ -29,10 +37,11 @@ const Task = ({ task }) => {
         })
     }
 
+    //Handler function to display task details in a modal
     const handleShowDetail = ()=>{
         handleShowDetailShow(task);
     }
-
+    //Handler function to display the update modal for the task.
     const handleShowUpdate = () =>{
         handleShowUpdateShow(task);
     }

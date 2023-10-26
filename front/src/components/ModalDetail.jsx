@@ -5,10 +5,15 @@ import { useTask } from '../context/task.context';
 import Completed from './Completed';
 import Pending from './Pending';
 
+/**
+ * ModalDetail is a component for displaying detailed information about a task within a modal.
+ */
 const ModalDetail = () => {
+    // Custom hooks to access modal-related state and task details
     const { showDetail, handleShowDetailClose } = useModal();
     const {globalTask} = useTask();
 
+    // Style object for customizing the modal content
     const modalContentStyle = {
         maxWidth: '400px', // Sets the desired maximum width
         wordWrap: 'break-word', // Makes long text fit in lines

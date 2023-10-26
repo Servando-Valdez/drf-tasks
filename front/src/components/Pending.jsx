@@ -1,4 +1,6 @@
-
+/**
+ * Pending is a component to show a icon if the task is not completed.
+ */
 const Pending = () => {
     return(
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" className="bi bi-x-circle-fill" viewBox="0 0 16 16">

@@ -7,16 +7,23 @@ import ModalDetail from './ModalDetail';
 import ModalUpdate from './modalUpdate';
 import CreateTask from './CreateTask';
 import Filter from './Filter';
+
+/**
+ * TaskList is a component for displaying a list of tasks.
+ * It retrieves and renders the tasks based on the current filter settings.
+ */
 const TaskList = () => {
+    // Custom hooks to access task-related state and functions
     const { tasks, getTasks, globalTask } = useTask();
+    // Custom hook to access the filter state
     const { filter } = useFilter();
 
+    /**
+     * useEffect is used to fetch and update the list of tasks when the component mounts
+     * and whenever the filter value changes. It ensures that the task list is up-to-date
+     * with the current filter settings.
+     */
     useEffect(() => {
-        // const fetchData = async () => {
-        //     await getTasks(filter);
-        // };
-
-        // fetchData();
         getTasks();
     }, [filter]);
 
