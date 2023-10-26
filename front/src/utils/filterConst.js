@@ -1,5 +1,5 @@
 export const FILTERS = {
-    ALL: 'todas',
-    COMPLETED: 'completadas',
-    PENDING: 'pendientes'
+    ALL: 'all',
+    COMPLETED: 'completed',
+    PENDING: 'pending'
 }

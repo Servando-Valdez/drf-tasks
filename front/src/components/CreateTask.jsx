@@ -13,7 +13,7 @@ const CreateTask = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await handleCreate({ nombre: newTask });
+        await handleCreate({ name: newTask });
         setNewTask('');
     }
 

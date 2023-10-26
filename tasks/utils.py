@@ -1,6 +1,6 @@
 from enum import Enum
 
 class TaskStatus(Enum):
-    ALL = 'todas'
-    COMPLETED = 'completadas'
-    PENDING = 'pendientes'
+    ALL = 'all'
+    COMPLETED = 'completed'
+    PENDING = 'pending'

@@ -63,17 +63,17 @@ export function TaskProvider({ children }) {
 
     const messageName =  (error) =>{
         const {data} = error.response;
-            if( data.nombre){
-                errorMessage(data.nombre);
+            if( data.name){
+                errorMessage(data.name);
                 return;
             }else{
                 errorMessage('Error to create task');
             }
     }
 
-    const handleCreate = async({nombre}) =>{
+    const handleCreate = async({name}) =>{
         try {
-            const newTask = await taskService.createTask({nombre});
+            const newTask = await taskService.createTask({name});
             await getTasks();
             // const updatedTasks = [newTask, ...tasks]
             // setTasks(updatedTasks);
@@ -85,14 +85,14 @@ export function TaskProvider({ children }) {
 
     const handleUpdate = async ({
         uuid,
-        nombre,
-        completada
+        name,
+        completed
     }) => {
         try {
             await taskService.updateTask({
                 uuid,
-                nombre,
-                completada
+                name,
+                completed
             })
             refreshGlobalTask();
             // onUpdate(taskUpdated);

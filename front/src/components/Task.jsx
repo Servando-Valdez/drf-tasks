@@ -41,10 +41,10 @@ const Task = ({ task }) => {
         <>
             <tr>
                 <td className={
-                    task.completada ? 'text-decoration-line-through' : ''
+                    task.completed ? 'text-decoration-line-through' : ''
                 }
                     onClick={handleShowDetail}
-                >{task.nombre}</td>
+                >{task.name}</td>
                 <td className="d-flex justify-content-end">
                     <button
                         className='btn btn-warning mx-2 text-white'
@@ -66,8 +66,8 @@ const Task = ({ task }) => {
 
 Task.propTypes = {
     task: PropTypes.shape({
-        completada: PropTypes.bool,
-        nombre: PropTypes.string.isRequired,
+        completed: PropTypes.bool,
+        name: PropTypes.string.isRequired,
         uuid: PropTypes.string.isRequired,
     }).isRequired
 };

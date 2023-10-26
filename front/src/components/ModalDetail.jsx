@@ -15,10 +15,10 @@ const ModalDetail = () => {
                 <Modal.Title>Task</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <p>{globalTask.nombre}</p>
-                <p>completada: 
+                <p> Descripcion: {globalTask.name}</p>
+                <p>Completed:  
                     {
-                        globalTask.completada ? <Completed/> : <Pending/>
+                        globalTask.completed ? <Completed/> : <Pending/>
                     }
                 </p>
             </Modal.Body>

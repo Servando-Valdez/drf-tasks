@@ -15,9 +15,9 @@ class TaskList(APIView):
         if not status_param or status_param == TaskStatus.ALL.value:
             tasks = Task.objects.all()
         elif status_param == TaskStatus.COMPLETED.value:
-            tasks = Task.objects.filter(completada=True)
+            tasks = Task.objects.filter(completed=True)
         else:
-            tasks = Task.objects.filter(completada=False)
+            tasks = Task.objects.filter(completed=False)
         serializer = TaskSeralizer(tasks, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 

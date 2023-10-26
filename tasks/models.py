@@ -12,11 +12,11 @@ class AbstractModel(SafeDeleteModel):
         abstract = True
 class Task(AbstractModel):
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    nombre = models.CharField(max_length=100, null=False, blank=False)
-    completada = models.BooleanField(default=False)
+    name = models.CharField(max_length=100, null=False, blank=False)
+    completed = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['-created_at']
 
     def __str__(self):
-        return self.nombre
+        return self.name

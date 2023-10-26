@@ -24,16 +24,16 @@ const ModalUpdate = () =>{
         e.preventDefault();
         handleUpdate({
             uuid: globalTask.uuid,
-            nombre: updateTask,
-            completada: updateCompleted,
+            name: updateTask,
+            completed: updateCompleted,
         
         });
         handleShowUpdateClose();
     }
 
     useEffect(() => {
-        setUpdateTask(globalTask.nombre);
-        setUpdateCompleted(globalTask.completada);
+        setUpdateTask(globalTask.name);
+        setUpdateCompleted(globalTask.completed);
     }, [showUpdate]);
 
     return(
