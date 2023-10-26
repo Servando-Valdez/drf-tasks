@@ -27,7 +27,7 @@ const TaskList = () => {
                     <h1 className='text-center'>Task Manager</h1>
                     <CreateTask />
                     <Filter />
-                    <Table responsive='md'>
+                    <Table responsive='sm'>
                         <thead>
                             <tr>
                                 <th className='col-sm-6'>Task</th>

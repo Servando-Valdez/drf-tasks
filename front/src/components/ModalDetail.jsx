@@ -9,14 +9,22 @@ const ModalDetail = () => {
     const { showDetail, handleShowDetailClose } = useModal();
     const {globalTask} = useTask();
 
+    const modalContentStyle = {
+        maxWidth: '400px', // Sets the desired maximum width
+        wordWrap: 'break-word', // Makes long text fit in lines
+    };
     return(
         <Modal show={showDetail} onHide={handleShowDetailClose}>
             <Modal.Header className='d-flex justify-content-center'>
                 <Modal.Title>Task</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <p> Descripcion: {globalTask.name}</p>
-                <p>Completed:  
+                <p style={modalContentStyle}>
+                    <strong>Completed:&nbsp;&nbsp;</strong>
+                    {globalTask.name}
+                    </p>
+                <p>
+                    <strong>Completed:&nbsp;&nbsp;</strong>  
                     {
                         globalTask.completed ? <Completed/> : <Pending/>
                     }

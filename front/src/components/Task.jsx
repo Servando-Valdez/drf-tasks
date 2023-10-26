@@ -39,7 +39,7 @@ const Task = ({ task }) => {
 
     return (
         <>
-            <tr>
+            <tr className="bording">
                 <td className={
                     task.completed ? 'text-decoration-line-through' : ''
                 }

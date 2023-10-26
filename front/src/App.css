@@ -2,6 +2,12 @@ tr:hover td{
   background-color: #f5f5f5; /* Cambiar el color de fondo en hover */
 }
 
+.bording:hover{
+  border-left: 3px solid white;
+  border-right: 3px solid white;
+}
+
+
 #createTaske{
   margin-left: 100px;
   margin-right: 100px;
