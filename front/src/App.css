@@ -7,28 +7,43 @@ tr:hover td{
   margin-right: 100px;
 }
 
+#content{
+  margin-top: 20px;
+}
+
 @media screen and (min-width: 1000px) {
   #table{
     width: 50%;
   }
+
+  #content{
+    margin-top: 80px;
+  }
 }
 
-@media screen and (min-width: 850) {
-  #table{
+/* Pantallas con ancho menor o igual a 799px */
+@media screen and (max-width: 799px) {
+  #table {
     width: 75%;
   }
+  #content {
+    margin-top: 50px;
+  }
 }
 
+@media screen and (max-width: 800px) {
+  #table {
+    width: 75%;
+  }
+  #content {
+    margin-top: 50px;
+  }
+}
+
+/* Pantallas con ancho menor o igual a 600px */
 @media screen and (max-width: 600px) {
-  #table{
+  #table {
     width: 90%;
   }
-}
 
-@media screen and (max-width: 60px) {
-  #table{
-    width: 95%;
-    margin-left: 10px;
-    margin-right: 10px;
-  }
 }

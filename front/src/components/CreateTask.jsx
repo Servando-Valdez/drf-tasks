@@ -19,10 +19,9 @@ const CreateTask = () => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className='mb-2'>
                 <div className='input-group'>
                     <Form.Control
-                        id='form-create'
                         type="text"
                         placeholder="Enter task"
                         aria-label="Enter task"
