@@ -52,7 +52,7 @@ export function ModalProvider({ children }){
 export function useModal() {
     const context = useContext(ModalContext);
     if (!context) {
-        throw new Error('useTask must be used within a TaskProvider');
+        throw new Error('useModal must be used within a TaskProvider');
     }
     return context;
 }

@@ -2,15 +2,23 @@ import { useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
 import Task from './Task';
 import { useTask } from '../context/task.context';
+import { useFilter } from '../context/filter.context';
 import ModalDetail from './ModalDetail';
 import ModalUpdate from './modalUpdate';
 import CreateTask from './CreateTask';
+import Filter from './Filter';
 const TaskList = () => {
     const { tasks, getTasks, globalTask } = useTask();
+    const { filter } = useFilter();
 
     useEffect(() => {
+        // const fetchData = async () => {
+        //     await getTasks(filter);
+        // };
+
+        // fetchData();
         getTasks();
-    }, []);
+    }, [filter]);
 
     return (
         <>
@@ -18,6 +26,7 @@ const TaskList = () => {
                 <div id='table'>
                     <h1 className='text-center'>Task Manager</h1>
                     <CreateTask />
+                    <Filter />
                     <Table responsive='md'>
                         <thead>
                             <tr>

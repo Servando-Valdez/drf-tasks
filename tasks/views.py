@@ -6,11 +6,18 @@ from rest_framework.exceptions import NotFound
 from rest_framework import status
 from .models import Task
 from .serializer import TaskSeralizer
+from .utils import TaskStatus
 
 class TaskList(APIView):
     
     def get(self, request):
-        tasks = Task.objects.all()
+        status_param = request.GET.get('status')
+        if not status_param or status_param == TaskStatus.ALL.value:
+            tasks = Task.objects.all()
+        elif status_param == TaskStatus.COMPLETED.value:
+            tasks = Task.objects.filter(completada=True)
+        else:
+            tasks = Task.objects.filter(completada=False)
         serializer = TaskSeralizer(tasks, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 

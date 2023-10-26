@@ -6,8 +6,8 @@ const instance = axios.create({
 
 export class TaskService{
         
-        async getTasks(){
-                const response = await instance.get('/tasks');
+        async getTasks(status){
+                const response = await instance.get(`/tasks?status=${status}`);
                 return response.data;
         }
 

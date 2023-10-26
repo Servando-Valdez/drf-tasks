@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { errorMessage, successMessage } from '../utils/messages';
 import { TaskService } from '../apis/TaskApi';
-
+import { useFilter } from './filter.context';
 export const TaskContext = createContext();
 
 TaskProvider.propTypes = {
@@ -10,6 +10,9 @@ TaskProvider.propTypes = {
 };
 
 export function TaskProvider({ children }) {
+
+    const { filter } = useFilter();
+
     const [tasks, setTasks] = useState([]);
     const [globalTask, setGlobalTask] = useState(null);
 
@@ -21,7 +24,7 @@ export function TaskProvider({ children }) {
 
     const getTasks = async () => {
         try {
-            const data = await taskService.getTasks();
+            const data = await taskService.getTasks(filter);
             setTasks(data);
         } catch (error) {
             errorMessage('Error to get tasks');
@@ -42,12 +45,12 @@ export function TaskProvider({ children }) {
         }
     };
 
-    const onUpdate = (updateTask) => {
-        const updatedTasks = tasks.map((task) =>
-            task.uuid === updateTask.uuid ? updateTask : task
-        );
-        setTasks(updatedTasks);
-    };
+    // const onUpdate = (updateTask) => {
+    //     const updatedTasks = tasks.map((task) =>
+    //         task.uuid === updateTask.uuid ? updateTask : task
+    //     );
+    //     setTasks(updatedTasks);
+    // };
 
     const getTask = async (uuid) => {
         try {
@@ -58,15 +61,25 @@ export function TaskProvider({ children }) {
         }
     };
 
+    const messageName =  (error) =>{
+        const {data} = error.response;
+            if( data.nombre){
+                errorMessage(data.nombre);
+                return;
+            }else{
+                errorMessage('Error to create task');
+            }
+    }
+
     const handleCreate = async({nombre}) =>{
         try {
             const newTask = await taskService.createTask({nombre});
-            // const updatedTasks = [...tasks, newTask];
-            const updatedTasks = [newTask, ...tasks]
-            setTasks(updatedTasks);
+            await getTasks();
+            // const updatedTasks = [newTask, ...tasks]
+            // setTasks(updatedTasks);
             successMessage('Task created');
         } catch (error) {
-            errorMessage('Error to create task');
+            messageName(error)
         }
     }
 
@@ -76,16 +89,17 @@ export function TaskProvider({ children }) {
         completada
     }) => {
         try {
-            const taskUpdated = await taskService.updateTask({
+            await taskService.updateTask({
                 uuid,
                 nombre,
                 completada
             })
             refreshGlobalTask();
-            onUpdate(taskUpdated);
+            // onUpdate(taskUpdated);
+            getTasks();
             successMessage('Task updated');
         } catch (error) {
-            errorMessage('Error to update task');
+            messageName(error)
         }
     }
 
@@ -97,7 +111,7 @@ export function TaskProvider({ children }) {
                 handleCreate,
                 tasks,
                 onDelete,
-                onUpdate,
+                // onUpdate,
                 // onCreate,
                 globalTask,
                 setGlobalTask,
