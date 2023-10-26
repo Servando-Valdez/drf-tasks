@@ -45,7 +45,7 @@ const Task = ({ task }) => {
                 }
                     onClick={handleShowDetail}
                 >{task.nombre}</td>
-                <td className="d-flex justify-content-center">
+                <td className="d-flex justify-content-end">
                     <button
                         className='btn btn-warning mx-2 text-white'
                         onClick={handleShowUpdate}

@@ -18,23 +18,27 @@ const CreateTask = () => {
     }
 
     return (
-        <form id="createTask" onSubmit={handleSubmit}>
-            <div className='input-group'>
-                <Form.Control
-                    type="text"
-                    placeholder="Enter task"
-                    aria-label="Enter task"
-                    required
-                    value={newTask}
-                    onChange={handleNewTask}
-                    className='p-2'
-                    style={{ boxShadow: 'none', }}
-                />
-                <Button variant="primary" type='submit'>
-                    Create
-                </Button>
-            </div>
-        </form>
+        <div>
+            <form onSubmit={handleSubmit}>
+                <div className='input-group'>
+                    <Form.Control
+                        id='form-create'
+                        type="text"
+                        placeholder="Enter task"
+                        aria-label="Enter task"
+                        required
+                        value={newTask}
+                        onChange={handleNewTask}
+                        className='p-2'
+                        style={{ boxShadow: 'none' }}
+                    />
+                    <Button variant="primary" type='submit'>
+                        Create
+                    </Button>
+                </div>
+            </form>
+        </div>
+
     )
 };
 
