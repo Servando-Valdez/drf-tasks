@@ -3,25 +3,40 @@ import PropTypes from 'prop-types';
 import { errorMessage, successMessage } from '../utils/messages';
 import { TaskService } from '../apis/TaskApi';
 import { useFilter } from './filter.context';
+
 export const TaskContext = createContext();
 
 TaskProvider.propTypes = {
     children: PropTypes.node.isRequired,
 };
 
+/**
+ * TaskProvider component is responsible for managing the state and operations related to tasks.
+ * It provides a context that contains functions to interact with tasks, including getting, creating, updating, and deleting tasks.
+ * 
+ * @param {object} children - The child components that will have access to the task context.
+ */
 export function TaskProvider({ children }) {
 
     const { filter } = useFilter();
-
+    // State to store the list of tasks
     const [tasks, setTasks] = useState([]);
+    // State to store the current task for global access
     const [globalTask, setGlobalTask] = useState(null);
 
+    // Task service to interact with tasks
     const taskService = new TaskService();
 
+    /**
+     * Reset the global task state to null.
+     */
     const refreshGlobalTask = () => {
         setGlobalTask(null);
     }
 
+    /**
+     * Fetch and set the list of tasks based on the current filter.
+     */
     const getTasks = async () => {
         try {
             const data = await taskService.getTasks(filter);
@@ -31,13 +46,14 @@ export function TaskProvider({ children }) {
         }
     };
 
+    /**
+     * Delete a task with the specified UUID, and refresh the task list.
+     * 
+     * @param {string} uuid - The UUID of the task to delete.
+     */
     const onDelete = async(uuid) => {
         try {
             await taskService.deleteTask(uuid);
-            //other way of refresh tasks
-            // const updatedTasks = tasks.filter((task) => task.uuid !== uuid);
-
-            //refresh tasks
             getTasks();
             successMessage('Task deleted');
         } catch (error) {
@@ -45,13 +61,11 @@ export function TaskProvider({ children }) {
         }
     };
 
-    // const onUpdate = (updateTask) => {
-    //     const updatedTasks = tasks.map((task) =>
-    //         task.uuid === updateTask.uuid ? updateTask : task
-    //     );
-    //     setTasks(updatedTasks);
-    // };
-
+    /**
+     * Fetch and set a specific task's details based on its UUID.
+     * 
+     * @param {string} uuid - The UUID of the task to retrieve.
+     */
     const getTask = async (uuid) => {
         try {
             const task = await taskService.getTask(uuid);
@@ -61,6 +75,11 @@ export function TaskProvider({ children }) {
         }
     };
 
+    /**
+     * Extract and display an error message based on the response error.
+     * 
+     * @param {object} error - The error response object.
+     */
     const messageName =  (error) =>{
         const {data} = error.response;
             if( data.name){
@@ -71,18 +90,26 @@ export function TaskProvider({ children }) {
             }
     }
 
+    /**
+     * Create a new task with the provided name and refresh the task list.
+     * 
+     * @param {object} taskData - The data for the new task, including its name.
+     */
     const handleCreate = async({name}) =>{
         try {
-            const newTask = await taskService.createTask({name});
+            await taskService.createTask({name});
             await getTasks();
-            // const updatedTasks = [newTask, ...tasks]
-            // setTasks(updatedTasks);
             successMessage('Task created');
         } catch (error) {
             messageName(error)
         }
     }
 
+    /**
+     * Update a task with the provided UUID, name, and completion status, and refresh the task list.
+     * 
+     * @param {object} taskData - The data for the task update, including UUID, name, and completion status.
+     */
     const handleUpdate = async ({
         uuid,
         name,
@@ -95,7 +122,6 @@ export function TaskProvider({ children }) {
                 completed
             })
             refreshGlobalTask();
-            // onUpdate(taskUpdated);
             getTasks();
             successMessage('Task updated');
         } catch (error) {
@@ -124,6 +150,12 @@ export function TaskProvider({ children }) {
     );
 }
 
+/**
+ * Custom hook for accessing the task context.
+ * It allows components to access and perform operations related to tasks.
+ * 
+ * @returns {object} - An object containing functions and states for task management.
+ */
 export function useTask() {
     const context = useContext(TaskContext);
     if (!context) {
