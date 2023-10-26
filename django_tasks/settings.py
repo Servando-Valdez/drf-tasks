@@ -30,6 +30,9 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = True
 
 # ALLOWED_HOSTS = []
+
+# CORS_ALLOWED_ORIGINS = False
+
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
     'http://127.0.0.1:5173',
@@ -51,8 +54,13 @@ INSTALLED_APPS = [
     # Third party apps
     'rest_framework',
     'safedelete',
-    'corsheaders'
+    'corsheaders',
+    'drf_yasg',
 ]
+
+# REST_FRAMEWORK = {
+#     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+# }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
