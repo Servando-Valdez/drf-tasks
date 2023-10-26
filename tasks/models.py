@@ -15,5 +15,8 @@ class Task(AbstractModel):
     nombre = models.CharField(max_length=100, null=False, blank=False)
     completada = models.BooleanField(default=False)
 
+    class Meta:
+        ordering = ['-created_at']
+
     def __str__(self):
         return self.nombre
