@@ -16,3 +16,15 @@ class TaskSeralizer(serializers.ModelSerializer):
     #     if exists and (self.instance.pk != task.pk):
     #         raise serializers.ValidationError("El nombre ya existe")
     #     return value
+
+class CreateTaskSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Task
+        fields = ('nombre',)
+
+class UpdateTaskSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Task
+        fields = ('nombre', 'completada')

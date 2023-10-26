@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.exceptions import NotFound
 from rest_framework import status
 from .models import Task
-from .serializer import TaskSeralizer
+from .serializer import TaskSeralizer, CreateTaskSerializer, UpdateTaskSerializer
 from .utils import TaskStatus
 
 class TaskList(APIView):
@@ -22,11 +22,12 @@ class TaskList(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request):
-        serializer = TaskSeralizer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+        crate_serializer = CreateTaskSerializer(data=request.data)
+        if crate_serializer.is_valid():
+            task = crate_serializer.save()
+            task_serializer = TaskSeralizer(task)
+            return Response(task_serializer.data, status=status.HTTP_201_CREATED)
+        return Response(crate_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
     
 class TaskDetail(APIView):
     def get_object(self, pk):
@@ -42,11 +43,12 @@ class TaskDetail(APIView):
     
     def put(self, request, pk):
         task = self.get_object(pk)
-        serializer = TaskSeralizer(task, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+        update_serializer = UpdateTaskSerializer(task, data=request.data)
+        if update_serializer.is_valid():
+            task = update_serializer.save()
+            task_serializer = TaskSeralizer(task)
+            return Response(task_serializer.data, status=status.HTTP_200_OK)
+        return Response(update_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
     
     def delete(self, request, pk):
         task = self.get_object(pk)
