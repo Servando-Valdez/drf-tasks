@@ -20,11 +20,10 @@ const Task = ({ task }) => {
 
     return (
         <>
-            <tr className="bording">
+            <tr className="bording" onClick={()=> handleShowDetail(task)}>
                 <td className={
                     task.completed ? 'text-decoration-line-through' : ''
                 }
-                    onClick={()=> handleShowDetail(task)}
                 >{task.name}</td>
                 <td className="d-flex justify-content-end">
                     <button
