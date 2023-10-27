@@ -62,20 +62,10 @@ class UpdateTaskSerializer(serializers.ModelSerializer):
         fields = ('name', 'completed')
 
     def validate_name(self, value):
-        """
-        Validates the name of the task.
-
-        Parameters:
-        - value: The name of the task.
-
-        Returns:
-        - The name of the task if it is valid.
-
-        Raises:
-        - serializers.ValidationError if the name is not valid.
-        """
-        if ExistName(value):
-            raise serializers.ValidationError("Task with this name already exists.")
+        task = ExistName(value)
+        if task:
+            if self.instance.pk != task.pk:
+                raise serializers.ValidationError("Task with this name already exists.")
         return value
 
 
@@ -87,11 +77,11 @@ def ExistName(name):
     - name: The name of the task.
 
     Returns:
-    - True if a task with the given name exists.
-    - False otherwise.
+    - task with the given name exists.
+    - None otherwise.
     """
     try:
-        Task.objects.get(name=name)
-        return True
+        task = Task.objects.get(name=name)
+        return task
     except Task.DoesNotExist:
-        return False
+        return None
