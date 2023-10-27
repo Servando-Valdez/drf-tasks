@@ -25,7 +25,7 @@ const ModalDetail = () => {
             </Modal.Header>
             <Modal.Body>
                 <p style={modalContentStyle}>
-                    <strong>Completed:&nbsp;&nbsp;</strong>
+                    <strong>Description:&nbsp;&nbsp;</strong>
                     {globalTask.name}
                     </p>
                 <p>

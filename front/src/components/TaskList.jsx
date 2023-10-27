@@ -34,24 +34,37 @@ const TaskList = () => {
                     <h1 className='text-center'>Task Manager</h1>
                     <CreateTask />
                     <Filter />
-                    <Table responsive='sm'>
-                        <thead>
-                            <tr>
-                                <th className='col-sm-6'>Task</th>
-                                <th className='col-sm-6 '></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                tasks.map((task) => (
-                                    <Task
-                                        key={task.uuid}
-                                        task={task}
-                                    />
-                                ))
-                            }
-                        </tbody>
-                    </Table>
+                    {
+                        tasks.length === 0 ? (
+                            <p className='text-center'>
+                                <strong>No tasks</strong>
+                            </p>
+                        )
+                        :
+                        (
+                            <>
+                            
+                                <Table responsive='sm'>
+                                    <thead>
+                                        <tr>
+                                            <th className='col-sm-6'>Task</th>
+                                            <th className='col-sm-6 '></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            tasks.map((task) => (
+                                                <Task
+                                                    key={task.uuid}
+                                                    task={task}
+                                                />
+                                            ))
+                                        }
+                                    </tbody>
+                                </Table>
+                            </>
+                        )
+                    }
                 </div>
             </div>
             {
