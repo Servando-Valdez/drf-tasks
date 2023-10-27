@@ -86,13 +86,13 @@ export function TaskProvider({ children }) {
      * 
      * @param {object} error - The error response object.
      */
-    const messageName =  (error) =>{
+    const messageName =  (error, action) =>{
         const {data} = error.response;
             if( data.name){
                 errorMessage(data.name);
                 return;
             }else{
-                errorMessage('Error to create task');
+                errorMessage(`Error to ${action} task`);
             }
     }
 
@@ -107,7 +107,7 @@ export function TaskProvider({ children }) {
             await getTasks();
             successMessage('Task created');
         } catch (error) {
-            messageName(error)
+            messageName(error, 'create')
         }
     }
 
@@ -131,7 +131,7 @@ export function TaskProvider({ children }) {
             getTasks();
             successMessage('Task updated');
         } catch (error) {
-            messageName(error)
+            messageName(error, 'update')
         }
     }
 

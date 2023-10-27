@@ -29,6 +29,23 @@ class CreateTaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = ('name',)
+    
+    def validate_name(self, value):
+        """
+        Validates the name of the task.
+
+        Parameters:
+        - value: The name of the task.
+
+        Returns:
+        - The name of the task if it is valid.
+
+        Raises:
+        - serializers.ValidationError if the name is not valid.
+        """
+        if ExistName(value):
+            raise serializers.ValidationError("Task with this name already exists.")
+        return value
 
 class UpdateTaskSerializer(serializers.ModelSerializer):
     """
@@ -43,3 +60,38 @@ class UpdateTaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = ('name', 'completed')
+
+    def validate_name(self, value):
+        """
+        Validates the name of the task.
+
+        Parameters:
+        - value: The name of the task.
+
+        Returns:
+        - The name of the task if it is valid.
+
+        Raises:
+        - serializers.ValidationError if the name is not valid.
+        """
+        if ExistName(value):
+            raise serializers.ValidationError("Task with this name already exists.")
+        return value
+
+
+def ExistName(name):
+    """
+    Checks whether a task with the given name exists.
+
+    Parameters:
+    - name: The name of the task.
+
+    Returns:
+    - True if a task with the given name exists.
+    - False otherwise.
+    """
+    try:
+        Task.objects.get(name=name)
+        return True
+    except Task.DoesNotExist:
+        return False
