@@ -30,12 +30,14 @@ const Task = ({ task }) => {
                     <button
                         className='btn btn-warning mx-2 text-white'
                         onClick={()=> handleShowUpdate(task)}
+                        title="Update task"
                     >
                         <EditIcon />
                     </button>
                     <button
                         className='btn btn-danger mx-2'
                         onClick={()=> handleDelete(task.uuid)}
+                        title="Delete task"
                     >
                         <DeleteIcon />
                     </button>

@@ -1,9 +1,10 @@
 import { useState, createContext, useContext } from "react";
 import propTypes from 'prop-types';
 import { useTask } from './task.context';
-
+// Create a context
 const ModalContext = createContext();
 
+// Define prop types for ModalProvider
 ModalProvider.propTypes = {
     children: propTypes.node.isRequired,
 };

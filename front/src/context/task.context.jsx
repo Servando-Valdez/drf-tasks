@@ -4,8 +4,10 @@ import { errorMessage, successMessage, confirmMessage } from '../utils/messages'
 import { TaskService } from '../apis/TaskApi';
 import { useFilter } from './filter.context';
 
+// Create a context
 export const TaskContext = createContext();
 
+// Define prop types for TaskProvider
 TaskProvider.propTypes = {
     children: PropTypes.node.isRequired,
 };
