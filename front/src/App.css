@@ -17,50 +17,35 @@ tr:hover td{
 }
 
 @media screen and (min-width: 1000px) {
-  #table{
+  #table {
     width: 50%;
   }
   
-  #content{
-    margin-top: 80px;
+  #content {
+    margin-top: 60px;
   }
 }
 
-@media screen and (max-width: 800px) {
-  #table{
+@media screen and (min-width: 800px) and (max-width: 999px){
+  #table {
     width: 75%;
   }
-
-  #content{
+  #content {
     margin-top: 50px;
   }
 }
 
-@media screen and (min-width: 800px){
-  #table{
+@media screen and (max-width: 800px) and (min-width: 600px){
+  #table {
     width: 75%;
   }
-
-  #content{
+  #content {
     margin-top: 50px;
   }
 }
 
 @media screen and (max-width: 600px) {
-  #table{
-    width: 85%;
-  }
-  #title{
-    color: green;
-  } 
-}
-
-@media screen and (max-width: 600px) {
-  #table{
-    width: 85%;
-  }
-
-  #title{
-    color: blueviolet;
+  #table {
+    width: 90%;
   }
 }

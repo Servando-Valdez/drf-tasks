@@ -7,6 +7,7 @@ import ModalDetail from './ModalDetail';
 import ModalUpdate from './modalUpdate';
 import CreateTask from './CreateTask';
 import Filter from './Filter';
+import NoTasks from './NoTasks';
 
 /**
  * TaskList is a component for displaying a list of tasks.
@@ -36,19 +37,16 @@ const TaskList = () => {
                     <Filter />
                     {
                         tasks.length === 0 ? (
-                            <p className='text-center'>
-                                <strong>No tasks</strong>
-                            </p>
+                            <NoTasks />
                         )
                         :
                         (
                             <>
-                            
                                 <Table responsive='sm'>
                                     <thead>
                                         <tr>
-                                            <th className='col-sm-6'>Task</th>
-                                            <th className='col-sm-6 '></th>
+                                            <th className='col-sm-6 col-md-10 col-lg-10'>Task</th>
+                                            <th className='col-sm-6 col-md-2 col-lg-2'></th>
                                         </tr>
                                     </thead>
                                     <tbody>
