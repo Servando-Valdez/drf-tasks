@@ -1,4 +1,7 @@
 
+/**
+ * Component used to display a message when there are no tasks to show
+ */
 const NoTasks = () => {
     return (
         <p className='text-center'>
