@@ -63,9 +63,8 @@ class UpdateTaskSerializer(serializers.ModelSerializer):
 
     def validate_name(self, value):
         task = ExistName(value)
-        if task:
-            if self.instance.pk != task.pk:
-                raise serializers.ValidationError("Task with this name already exists.")
+        if task and self.instance.pk != task.pk:
+            raise serializers.ValidationError("Task with this name already exists.")
         return value
 
 
