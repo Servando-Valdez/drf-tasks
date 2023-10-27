@@ -10,7 +10,7 @@ import Pending from './Pending';
  */
 const ModalDetail = () => {
     // Custom hooks to access modal-related state and task details
-    const { showDetail, handleShowDetailClose } = useModal();
+    const { showDetail, handleCloseDetail } = useModal();
     const {globalTask} = useTask();
 
     // Style object for customizing the modal content
@@ -19,7 +19,7 @@ const ModalDetail = () => {
         wordWrap: 'break-word', // Makes long text fit in lines
     };
     return(
-        <Modal show={showDetail} onHide={handleShowDetailClose}>
+        <Modal show={showDetail} onHide={handleCloseDetail}>
             <Modal.Header className='d-flex justify-content-center'>
                 <Modal.Title>Task</Modal.Title>
             </Modal.Header>
@@ -36,7 +36,7 @@ const ModalDetail = () => {
                 </p>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={handleShowDetailClose}>Close</Button>
+                <Button variant="secondary" onClick={handleCloseDetail}>Close</Button>
             </Modal.Footer>
         </Modal>
     )

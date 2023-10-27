@@ -27,3 +27,22 @@ export const successMessage = (message, title) => {
         text: message,
     });
 }
+
+/**
+ * confirmMessage is a function that displays a confirmation dialog using Swal (SweetAlert).
+ * This dialog prompts the user to confirm an action, such as deleting an item.
+ * It returns a promise that resolves with the user's choice.
+ *
+ * @returns {Promise} A promise that resolves with the user's choice in the confirmation dialog.
+ */
+export const confirmMessage = () => {
+    return Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#0d6efd',
+        cancelButtonColor: '#dc3545',
+        confirmButtonText: 'Yes, delete it!'
+    })
+}

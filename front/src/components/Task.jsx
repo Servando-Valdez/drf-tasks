@@ -1,4 +1,3 @@
-import Swal from "sweetalert2";
 import EditIcon from "./EditIcon";
 import DeleteIcon from "./DeleteIcon";
 import PropTypes from 'prop-types';
@@ -13,38 +12,11 @@ import { useModal } from "../context/modal.context";
  */
 const Task = ({ task }) => {
     // Custom hook to access task-related functions and modal-related functions
-    const { onDelete } = useTask();
+    const { handleDelete } = useTask();
     const {
-        handleShowUpdateShow,
-        handleShowDetailShow,
+        handleShowUpdate,
+        handleShowDetail,
     } = useModal();
-
-    //Handler function to delete a task after user confirmation.
-    const handleDelete = () => {
-
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#0d6efd',
-            cancelButtonColor: '#dc3545',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                onDelete(task.uuid);
-            }
-        })
-    }
-
-    //Handler function to display task details in a modal
-    const handleShowDetail = ()=>{
-        handleShowDetailShow(task);
-    }
-    //Handler function to display the update modal for the task.
-    const handleShowUpdate = () =>{
-        handleShowUpdateShow(task);
-    }
 
     return (
         <>
@@ -52,18 +24,18 @@ const Task = ({ task }) => {
                 <td className={
                     task.completed ? 'text-decoration-line-through' : ''
                 }
-                    onClick={handleShowDetail}
+                    onClick={()=> handleShowDetail(task)}
                 >{task.name}</td>
                 <td className="d-flex justify-content-end">
                     <button
                         className='btn btn-warning mx-2 text-white'
-                        onClick={handleShowUpdate}
+                        onClick={()=> handleShowUpdate(task)}
                     >
                         <EditIcon />
                     </button>
                     <button
                         className='btn btn-danger mx-2'
-                        onClick={handleDelete}
+                        onClick={()=> handleDelete(task.uuid)}
                     >
                         <DeleteIcon />
                     </button>

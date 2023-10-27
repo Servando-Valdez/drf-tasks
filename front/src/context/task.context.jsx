@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
-import { errorMessage, successMessage } from '../utils/messages';
+import { errorMessage, successMessage, confirmMessage } from '../utils/messages';
 import { TaskService } from '../apis/TaskApi';
 import { useFilter } from './filter.context';
 
@@ -51,11 +51,15 @@ export function TaskProvider({ children }) {
      * 
      * @param {string} uuid - The UUID of the task to delete.
      */
-    const onDelete = async(uuid) => {
+    const handleDelete = async(uuid) => {
         try {
-            await taskService.deleteTask(uuid);
-            getTasks();
-            successMessage('Task deleted');
+            const result = await confirmMessage();
+            if(result.isConfirmed){
+                await taskService.deleteTask(uuid);
+                await getTasks();
+                successMessage('Task deleted');
+            }
+            
         } catch (error) {
             errorMessage('Error to delete task');
         }
@@ -136,7 +140,7 @@ export function TaskProvider({ children }) {
                 getTasks,
                 handleCreate,
                 tasks,
-                onDelete,
+                handleDelete,
                 // onUpdate,
                 // onCreate,
                 globalTask,

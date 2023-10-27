@@ -22,7 +22,7 @@ export function ModalProvider({ children }){
     /**
      * Close the update modal and refresh the global task.
      */
-    const handleShowUpdateClose = () => {
+    const handleCloseUpdate = () => {
         refreshGlobalTask();
         setShowUpdate(false);
     }
@@ -32,7 +32,7 @@ export function ModalProvider({ children }){
      * 
      * @param {object} task - The task to be updated.
      */
-    const handleShowUpdateShow = async(task) => {
+    const handleShowUpdate = async(task) => {
         await getTask(task.uuid);
         setShowUpdate(true);
     }
@@ -40,9 +40,10 @@ export function ModalProvider({ children }){
     /**
      * Close the detail modal and refresh the global task.
      */
-    const handleShowDetailClose = () => {
+    const handleCloseDetail = () => {
         refreshGlobalTask()
         setShowDetail(false);
+        console.log(showDetail);
     }
 
     /**
@@ -50,7 +51,7 @@ export function ModalProvider({ children }){
      * 
      * @param {object} task - The task to be displayed in detail.
      */
-    const handleShowDetailShow = (task) => {
+    const handleShowDetail = (task) => {
         getTask(task.uuid);
         setShowDetail(true);
     }
@@ -62,10 +63,10 @@ export function ModalProvider({ children }){
                 setShowDetail,
                 showUpdate,
                 setShowUpdate,
-                handleShowUpdateClose,
-                handleShowUpdateShow,
-                handleShowDetailClose,
-                handleShowDetailShow,
+                handleCloseUpdate,
+                handleShowUpdate,
+                handleCloseDetail,
+                handleShowDetail,
             }}
         >
             {children}

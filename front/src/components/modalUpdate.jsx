@@ -17,7 +17,7 @@ const ModalUpdate = () =>{
 
     // Custom hooks to access task details, update function, and modal-related state
     const {globalTask, handleUpdate} = useTask();
-    const { showUpdate, handleShowUpdateClose  } = useModal();
+    const { showUpdate, handleCloseUpdate  } = useModal();
 
     //Handler function to update the task name as the user types.
     const handleUpdateTask = (e) => {
@@ -38,7 +38,7 @@ const ModalUpdate = () =>{
             completed: updateCompleted,
         
         });
-        handleShowUpdateClose();
+        handleCloseUpdate();
     }
 
     /**
@@ -51,7 +51,7 @@ const ModalUpdate = () =>{
     }, [showUpdate]);
 
     return(
-        <Modal show={showUpdate} onHide={handleShowUpdateClose}>
+        <Modal show={showUpdate} onHide={handleCloseUpdate}>
             <Modal.Header className='d-flex justify-content-center'>
                 <Modal.Title>Update Task</Modal.Title>
             </Modal.Header>
@@ -84,7 +84,7 @@ const ModalUpdate = () =>{
                 </Button>
                 <Button
                     variant="secondary"
-                    onClick={handleShowUpdateClose}
+                    onClick={handleCloseUpdate}
                 >Close</Button>
             </Modal.Footer>
         </Modal>
